@@ -16,7 +16,8 @@ describe('Проверка контактной информации на сай
       cy.request(url).then((response) => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(response.body, 'text/html');
-        const telegramLink = doc.querySelector('a[href="http://t.me/alexanderbyndyu"]');
+        const btnInfoElement = doc.querySelector('.popup-callback__contacts');
+        const telegramLink = btnInfoElement ? btnInfoElement.querySelector('a[href="http://t.me/alexanderbyndyu"]') : null;
 
         expect(telegramLink).not.to.be.null;
       });
